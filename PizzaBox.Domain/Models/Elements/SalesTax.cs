@@ -25,7 +25,13 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public static readonly SalesTax Empty = new SalesTax ();
 
-        public SalesTax () : base () { _resource = new Data.Entities.StateTax (); }
+        public SalesTax () : base () {
+
+            _resource = new Data.Entities.StateTax ();
+
+            _resource.Id = Guid.NewGuid ();
+
+        }
 
         public SalesTax ( Data.Entities.StateTax entity ) { _resource = entity; }
 

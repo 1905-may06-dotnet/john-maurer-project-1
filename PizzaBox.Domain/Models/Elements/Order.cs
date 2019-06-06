@@ -34,7 +34,13 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public static readonly Order Empty = new Order ();
 
-        public Order () : base () { _resource = new Data.Entities.Order (); }
+        public Order () : base () {
+
+            _resource = new Data.Entities.Order ();
+
+            _resource.Id = Guid.NewGuid ();
+
+        }
 
         public Order ( Data.Entities.Order entity ) { _resource = entity; }
 

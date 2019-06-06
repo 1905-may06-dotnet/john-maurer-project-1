@@ -50,7 +50,13 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public static readonly Address Empty = new Address ();
 
-        public Address () : base () { _resource = new Data.Entities.Address (); }
+        public Address () : base () {
+
+            _resource = new Data.Entities.Address ();
+
+            _resource.Id = Guid.NewGuid ();
+
+        }
 
         public Address ( Data.Entities.Address entity ) { _resource = entity; }
 

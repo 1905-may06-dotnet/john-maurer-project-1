@@ -25,7 +25,13 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public static readonly Business Empty = new Business ();
 
-        public Business () : base () { _resource = new Data.Entities.Outlet (); }
+        public Business () : base () {
+
+            _resource = new Data.Entities.Outlet ();
+
+            _resource.Id = Guid.NewGuid ();
+
+        }
 
         public Business ( Data.Entities.Outlet entity ) { _resource = entity; }
 

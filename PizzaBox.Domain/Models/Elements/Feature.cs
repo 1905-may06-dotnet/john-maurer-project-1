@@ -27,7 +27,13 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public static readonly Feature Empty = new Feature();
 
-        public Feature () : base () { _resource = new Data.Entities.Feature (); }
+        public Feature () : base () {
+
+            _resource = new Data.Entities.Feature ();
+
+            _resource.Id = Guid.NewGuid ();
+
+        }
 
         public Feature ( Data.Entities.Feature entity ) { _resource = entity; }
 
