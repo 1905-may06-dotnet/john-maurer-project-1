@@ -72,10 +72,15 @@ namespace PizzaBox.Shell.Utilities {
             owner.WageType = "salary";
             owner.Information = new Data.Entities.Person ();
 
-            System.Console.WriteLine ( "Create Outlet\n\n" );
+            System.Console.WriteLine ( "Create Outlet\n" );
 
             System.Console.WriteLine ( prompts [ 0 ] );
             business.Name = System.Console.ReadLine ();
+
+            Banner ();
+
+            System.Console.WriteLine ( "Outlet Location - {0}", business.Name );
+
             System.Console.WriteLine ();
             System.Console.WriteLine ( prompts [ 1 ] );
             bizaddr.City = System.Console.ReadLine ();
@@ -92,6 +97,11 @@ namespace PizzaBox.Shell.Utilities {
             System.Console.WriteLine ( prompts [ 5 ] );
             bizaddr.Apartment = System.Console.ReadLine ();
             System.Console.WriteLine ();
+
+            Banner ();
+
+            System.Console.WriteLine ( "Owner Personal Information - {0}", business.Name );
+
             System.Console.WriteLine ( prompts [ 6 ] );
             owner.Information.Fname = System.Console.ReadLine ();
             System.Console.WriteLine ();
@@ -116,6 +126,11 @@ namespace PizzaBox.Shell.Utilities {
             System.Console.WriteLine ( prompts [ 13 ] );
             birthyear = Convert.ToInt32 ( System.Console.ReadLine () );
             System.Console.WriteLine ();
+
+            Banner ();
+
+            System.Console.WriteLine ( "Owner Personal Information - Location - {0}", business.Name );
+
             System.Console.WriteLine ( prompts [ 14 ] );
             owneraddr.City = System.Console.ReadLine ();
             System.Console.WriteLine ();
@@ -131,6 +146,11 @@ namespace PizzaBox.Shell.Utilities {
             System.Console.WriteLine ( prompts [ 18 ] );
             owneraddr.Apartment = System.Console.ReadLine ();
             System.Console.WriteLine ();
+
+            Banner ();
+
+            System.Console.WriteLine ( "Owner Personal Information - Profile - {0}", business.Name );
+
             System.Console.WriteLine ( prompts [ 19 ] );
             owner.Username = System.Console.ReadLine ();
             System.Console.WriteLine ();
@@ -146,16 +166,19 @@ namespace PizzaBox.Shell.Utilities {
             owner.Information.DoB = new DateTime ( birthyear, birthmonth, birthday );
 
             business.Save ();
+
+            bizaddr.ResidentInformation = business.Id;
+
             bizaddr.OutletId = business.Id;
             bizaddr.Save ();
             owner.EmployerId = business.Id;
             
             new PizzaBox.Domain.Models.Elements.Customer ( owner.Information ).Save ();
 
-            owner.PersonId = owner.Information.Id;
+            //owner.PersonId = owner.Information.Id;
 
             owner.Save ();
-            owneraddr.PersonId = owner.PersonId;
+            //owneraddr.PersonId = owner.PersonId;
             owneraddr.Save ();
 
             System.Console.WriteLine ();
