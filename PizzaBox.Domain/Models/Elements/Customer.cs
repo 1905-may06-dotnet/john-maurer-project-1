@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Text;
 
 namespace PizzaBox.Domain.Models.Elements {
@@ -36,7 +37,7 @@ namespace PizzaBox.Domain.Models.Elements {
             if ( _resource.Id == Guid.Empty || _resource.Id == null ) _resource.Id = Guid.NewGuid ();
             
             //foreach ( var address in _resource.Addresses )
-                //if ( address.PersonId == Guid.Empty || address.PersonId == null ) address.PersonId = _resource.Id;
+                //if ( address.PersonId == Guid.Empty || address.PersonId == null ) address.PersonId = new Guid ();
 
             lock ( _cust_writeLock ) {
 

@@ -41,7 +41,7 @@ namespace PizzaBox.Domain.Models.Elements {
 
                 using ( var context = new Data.PizzaBoxDbContext () ) {
 
-                    if ( context.Addresses.Find ( _resource.Id ) == null ) {
+                    if ( context.Features.Find ( _resource.Id ) == null ) {
 
                         context.Entry ( _resource );
                         context.Attach < Data.Entities.Feature > ( _resource );

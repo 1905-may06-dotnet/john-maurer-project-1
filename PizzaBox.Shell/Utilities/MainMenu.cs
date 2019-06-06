@@ -9,7 +9,34 @@ namespace PizzaBox.Shell.Utilities {
 
         private static List < string > prompts = new List< string > ();
 
-        private static void initPrompts () {
+        private static bool MainPromptIsValid ( string selection ) {
+
+            return ( selection == "1" || selection == "2" || selection == "3" || selection.ToLower () == "exit"  );
+
+        }
+
+        private static void Banner () {
+
+            System.Console.Clear ();
+
+            System.Console.WriteLine ( "PizzaBox.Shell - Outlet Manager\n\n" );
+
+        }
+
+        public static void CreateOutletCustomer () {
+
+            Utilities.MainMenu.Banner ();
+
+            var prompts = new List < string > ();
+
+            var business  = new Domain.Models.Elements.Business ();
+            var bizaddr   = new Domain.Models.Elements.Address  ();
+            var owner     = new Domain.Models.Elements.Employee ();
+            var owneraddr = new Domain.Models.Elements.Address  ();
+
+            var birthday   = 0;
+            var birthmonth = 0;
+            var birthyear  = 0;
 
             prompts.Add ( "Company Name: " );
 
@@ -39,31 +66,6 @@ namespace PizzaBox.Shell.Utilities {
             prompts.Add ( "        Wage: " );
             prompts.Add ( "    WageType: " );
             prompts.Add ( "      Gender: " );
-
-        }
-
-        private static bool MainPromptIsValid ( string selection ) {
-
-            return ( selection == "1" || selection == "2" || selection == "3" || selection.ToLower () == "exit"  );
-
-        }
-
-        private static void Banner () { System.Console.WriteLine ( "PizzaBox.Shell - Outlet Manager\n\n" ); }
-
-        public static void CreateOutletCustomer () {
-
-            Utilities.MainMenu.Banner ();
-
-            var prompts = new List < string > ();
-
-            var business  = new Domain.Models.Elements.Business ();
-            var bizaddr   = new Domain.Models.Elements.Address  ();
-            var owner     = new Domain.Models.Elements.Employee ();
-            var owneraddr = new Domain.Models.Elements.Address  ();
-
-            var birthday   = 0;
-            var birthmonth = 0;
-            var birthyear  = 0;
 
             owner.Position = "owner";
             owner.Status   = "active";
@@ -143,12 +145,12 @@ namespace PizzaBox.Shell.Utilities {
 
             owner.Information.DoB = new DateTime ( birthyear, birthmonth, birthday );
 
-            business.Save ();
+            /*business.Save ();
             bizaddr.OutletId = business.Id;
             bizaddr.Save ();
             owner.EmployerId = business.Id;
             
-            new PizzaBox.Domain.Models.Elements.Customer ( owner.Information ).Save ();
+            new PizzaBox.Domain.Models.Elements.Customer ( owner.Information ).Save ();*/
             
             //owner.Save ();
             //owneraddr.PersonId = owner.PersonId;

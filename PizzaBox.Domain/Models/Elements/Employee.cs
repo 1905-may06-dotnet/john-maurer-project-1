@@ -33,11 +33,11 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public override Elements.IElement < Data.Entities.Employee > Save () {
 
-            if ( _resource.Id == Guid.Empty || _resource.Id == null ) _resource.Id = Guid.NewGuid ();
-            if ( _resource.Person.Id == Guid.Empty || _resource.Person.Id == null ) _resource.PersonId  = Guid.NewGuid ();
+            //if ( _resource.Id == Guid.Empty || _resource.Id == null ) _resource.Id = Guid.NewGuid ();
+            //if ( _resource.Person.Id == Guid.Empty || _resource.Person.Id == null ) _resource.PersonId  = Guid.NewGuid ();
 
-            foreach ( var address in _resource.Person.Addresses )
-                if ( address.PersonId == Guid.Empty || address.PersonId == null ) address.PersonId = _resource.Id;
+            //foreach ( var address in _resource.Person.Addresses )
+                //if ( address.PersonId == Guid.Empty || address.PersonId == null ) address.PersonId = _resource.Id;
 
             lock ( _emp_writeLock ) {
 

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\jmau0\\Desktop\\Revature\\DOT NET CORE Week 1-3 Jump\\Project-1\\PizzaBox.Domain\\PizzaBox.Domain.csproj": {}
+    "C:\\Users\\jmau0\\Desktop\\Revature\\Project-1-1\\PizzaBox.Domain\\PizzaBox.Domain.csproj": {}
   },
   "projects": {
-    "C:\\Users\\jmau0\\Desktop\\Revature\\DOT NET CORE Week 1-3 Jump\\Project-1\\PizzaBox.Data\\PizzaBox.Data.csproj": {
+    "C:\\Users\\jmau0\\Desktop\\Revature\\Project-1-1\\PizzaBox.Data\\PizzaBox.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jmau0\\Desktop\\Revature\\DOT NET CORE Week 1-3 Jump\\Project-1\\PizzaBox.Data\\PizzaBox.Data.csproj",
+        "projectUniqueName": "C:\\Users\\jmau0\\Desktop\\Revature\\Project-1-1\\PizzaBox.Data\\PizzaBox.Data.csproj",
         "projectName": "PizzaBox.Data",
-        "projectPath": "C:\\Users\\jmau0\\Desktop\\Revature\\DOT NET CORE Week 1-3 Jump\\Project-1\\PizzaBox.Data\\PizzaBox.Data.csproj",
+        "projectPath": "C:\\Users\\jmau0\\Desktop\\Revature\\Project-1-1\\PizzaBox.Data\\PizzaBox.Data.csproj",
         "packagesPath": "C:\\Users\\jmau0\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jmau0\\Desktop\\Revature\\DOT NET CORE Week 1-3 Jump\\Project-1\\PizzaBox.Data\\obj\\",
+        "outputPath": "C:\\Users\\jmau0\\Desktop\\Revature\\Project-1-1\\PizzaBox.Data\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -66,14 +66,14 @@
         }
       }
     },
-    "C:\\Users\\jmau0\\Desktop\\Revature\\DOT NET CORE Week 1-3 Jump\\Project-1\\PizzaBox.Domain\\PizzaBox.Domain.csproj": {
+    "C:\\Users\\jmau0\\Desktop\\Revature\\Project-1-1\\PizzaBox.Domain\\PizzaBox.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\jmau0\\Desktop\\Revature\\DOT NET CORE Week 1-3 Jump\\Project-1\\PizzaBox.Domain\\PizzaBox.Domain.csproj",
+        "projectUniqueName": "C:\\Users\\jmau0\\Desktop\\Revature\\Project-1-1\\PizzaBox.Domain\\PizzaBox.Domain.csproj",
         "projectName": "PizzaBox.Domain",
-        "projectPath": "C:\\Users\\jmau0\\Desktop\\Revature\\DOT NET CORE Week 1-3 Jump\\Project-1\\PizzaBox.Domain\\PizzaBox.Domain.csproj",
+        "projectPath": "C:\\Users\\jmau0\\Desktop\\Revature\\Project-1-1\\PizzaBox.Domain\\PizzaBox.Domain.csproj",
         "packagesPath": "C:\\Users\\jmau0\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\jmau0\\Desktop\\Revature\\DOT NET CORE Week 1-3 Jump\\Project-1\\PizzaBox.Domain\\obj\\",
+        "outputPath": "C:\\Users\\jmau0\\Desktop\\Revature\\Project-1-1\\PizzaBox.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -94,8 +94,8 @@
         "frameworks": {
           "netcoreapp2.2": {
             "projectReferences": {
-              "C:\\Users\\jmau0\\Desktop\\Revature\\DOT NET CORE Week 1-3 Jump\\Project-1\\PizzaBox.Data\\PizzaBox.Data.csproj": {
-                "projectPath": "C:\\Users\\jmau0\\Desktop\\Revature\\DOT NET CORE Week 1-3 Jump\\Project-1\\PizzaBox.Data\\PizzaBox.Data.csproj"
+              "C:\\Users\\jmau0\\Desktop\\Revature\\Project-1-1\\PizzaBox.Data\\PizzaBox.Data.csproj": {
+                "projectPath": "C:\\Users\\jmau0\\Desktop\\Revature\\Project-1-1\\PizzaBox.Data\\PizzaBox.Data.csproj"
               }
             }
           }

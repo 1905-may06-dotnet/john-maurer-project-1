@@ -15,6 +15,7 @@ namespace Tests.UnitTest {
             record.MiddleName = "so";
             record.LastName   = "soTired";
             record.Phone      = "333-555-0908";
+            record.Gender     = true;
 
             record.Save ();
 
@@ -42,7 +43,8 @@ namespace Tests.UnitTest {
                 FirstName  = "me",
                 MiddleName = "so",
                 LastName   = "soTired",
-                Phone      = "333-555-0908"
+                Phone      = "333-555-0908",
+                Gender     = false
 
             };
 
@@ -67,6 +69,7 @@ namespace Tests.UnitTest {
             record.MiddleName = "precious";
             record.LastName   = "evil";
             record.Phone      = "433-081-4761";
+            record.Gender     = false;
 
             record.Save ();
 
