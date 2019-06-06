@@ -35,7 +35,7 @@ namespace PizzaBox.Domain.Models.Elements {
 
             if ( _resource.Id == Guid.Empty || _resource.Id == null ) _resource.Id = Guid.NewGuid ();
 
-            /*foreach ( var address in _resource.Addresses )
+            foreach ( var address in _resource.Addresses )
                 if ( address.Id == Guid.Empty || address.Id == null ) address.Id = Guid.NewGuid ();
 
             foreach ( var employee in _resource.Employees )
@@ -48,7 +48,7 @@ namespace PizzaBox.Domain.Models.Elements {
                 if ( item.Id == Guid.Empty || item.Id == null ) item.Id = Guid.NewGuid ();
 
             foreach ( var order in _resource.Orders )
-                if ( order.Id == Guid.Empty || order.Id == null ) order.Id = Guid.NewGuid ();*/
+                if ( order.Id == Guid.Empty || order.Id == null ) order.Id = Guid.NewGuid ();
 
             lock ( _biz_writeLock ) {
 

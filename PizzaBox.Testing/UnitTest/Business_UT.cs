@@ -83,13 +83,10 @@ namespace Tests.UnitTest {
             } ) );
 
             record.Save ();
-
-            System.Guid test = record.Id;
-
             record.Delete ();
 
             using ( var context = new PizzaBox.Data.PizzaBoxDbContext () )
-                if ( context.Outlets.Find ( test ) == null )
+                if ( context.Outlets.Find ( record.Id ) == null )
                     Assert.Pass (); else Assert.Fail ();
 
         }

@@ -30,6 +30,8 @@ namespace Tests.UnitTest {
 
             new PizzaBox.Domain.Models.Elements.Customer ( record.Information ).Save ();
 
+            record.PersonId = record.Information.Id;
+
             record.Save ();
 
             using ( var context = new PizzaBox.Data.PizzaBoxDbContext () )

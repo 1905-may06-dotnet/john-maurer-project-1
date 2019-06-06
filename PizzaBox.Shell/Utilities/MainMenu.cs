@@ -145,16 +145,18 @@ namespace PizzaBox.Shell.Utilities {
 
             owner.Information.DoB = new DateTime ( birthyear, birthmonth, birthday );
 
-            /*business.Save ();
+            business.Save ();
             bizaddr.OutletId = business.Id;
             bizaddr.Save ();
             owner.EmployerId = business.Id;
             
-            new PizzaBox.Domain.Models.Elements.Customer ( owner.Information ).Save ();*/
-            
-            //owner.Save ();
-            //owneraddr.PersonId = owner.PersonId;
-            //owneraddr.Save ();
+            new PizzaBox.Domain.Models.Elements.Customer ( owner.Information ).Save ();
+
+            owner.PersonId = owner.Information.Id;
+
+            owner.Save ();
+            owneraddr.PersonId = owner.PersonId;
+            owneraddr.Save ();
 
             System.Console.WriteLine ();
             System.Console.WriteLine ( "saved..." );

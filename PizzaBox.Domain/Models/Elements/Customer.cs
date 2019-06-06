@@ -36,8 +36,8 @@ namespace PizzaBox.Domain.Models.Elements {
 
             if ( _resource.Id == Guid.Empty || _resource.Id == null ) _resource.Id = Guid.NewGuid ();
             
-            //foreach ( var address in _resource.Addresses )
-                //if ( address.PersonId == Guid.Empty || address.PersonId == null ) address.PersonId = new Guid ();
+            foreach ( var address in _resource.Addresses )
+                if ( address.PersonId == Guid.Empty || address.PersonId == null ) address.PersonId = Guid.NewGuid ();
 
             lock ( _cust_writeLock ) {
 
