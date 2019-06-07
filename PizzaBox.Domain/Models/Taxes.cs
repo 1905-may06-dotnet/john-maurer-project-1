@@ -26,7 +26,18 @@ namespace PizzaBox.Domain.Models {
 
         }
 
-        protected override HashSet < Elements.SalesTax > ReadAll () {
+        public Taxes () : base () { _resource = ReadAll (); }
+
+        public Taxes ( ref Taxes addresses ) : base () { _resource = addresses._resource; }
+
+        public Taxes ( ref ICollection < Data.Entities.StateTax > addresses ) {
+
+            foreach ( var index in addresses )
+                _resource.Add ( new Models.Elements.SalesTax ( index ) );
+
+        }
+
+        public override HashSet < Elements.SalesTax > ReadAll () {
 
             using ( var context = new Data.PizzaBoxDbContext () ) { 
 
@@ -38,17 +49,6 @@ namespace PizzaBox.Domain.Models {
                 return result;
 
             }
-
-        }
-
-        public Taxes () : base () { _resource = ReadAll (); }
-
-        public Taxes ( ref Taxes addresses ) : base () { _resource = addresses._resource; }
-
-        public Taxes ( ref ICollection < Data.Entities.StateTax > addresses ) {
-
-            foreach ( var index in addresses )
-                _resource.Add ( new Models.Elements.SalesTax ( index ) );
 
         }
 

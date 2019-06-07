@@ -26,7 +26,20 @@ namespace PizzaBox.Domain.Models {
 
         }
 
-        protected override HashSet < Elements.Feature > ReadAll () {
+        public Features () : base () { _resource = ReadAll (); }
+
+        public Features ( ref Features addresses ) : base () { _resource = addresses._resource; }
+
+        public Features ( ref ICollection < Data.Entities.Feature > addresses ) {
+
+            foreach ( var index in addresses )
+                _resource.Add ( new Models.Elements.Feature ( index ) );
+
+        }
+
+        public override Elements.Feature Query ( ref Elements.FeatureQuery Index ) { return Read ( Index ); }
+
+        public override HashSet < Elements.Feature > ReadAll () {
 
             using ( var context = new Data.PizzaBoxDbContext () ) { 
 
@@ -40,19 +53,6 @@ namespace PizzaBox.Domain.Models {
             }
 
         }
-
-        public Features () : base () { _resource = ReadAll (); }
-
-        public Features ( ref Features addresses ) : base () { _resource = addresses._resource; }
-
-        public Features ( ref ICollection < Data.Entities.Feature > addresses ) {
-
-            foreach ( var index in addresses )
-                _resource.Add ( new Models.Elements.Feature ( index ) );
-
-        }
-
-        public override Elements.Feature Query ( ref Elements.FeatureQuery Index ) { return Read ( Index ); }
 
     }
 

@@ -139,28 +139,6 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public string Zip { get { return _resource.Zip; } set { _resource.Zip = value; } }
 
-        public object ResidentInformation {
-
-            get {
-
-                if ( _resource.PersonId == Guid.Empty && _resource.OutletId != Guid.Empty )
-                    throw new ArgumentException ( "Address has no recorded resident!\n Person and Outlet Id's are null" );
-
-                return _resource.PersonId != Guid.Empty ? ( object ) _resource.Person : ( object ) _resource.Outlet;
-
-            } set {
-
-                if ( _resource.PersonId == Guid.Empty && _resource.OutletId != Guid.Empty )
-                    throw new ArgumentException ( "Address has no resident!\n Person and Outlet Id's are null" );
-
-                if ( value.GetType ().FullName.Contains ( "Person" ) ) _resource.Person = ( Data.Entities.Person ) value;
-                else if ( value.GetType ().FullName.Contains ( "Outlet" ) ) _resource.Outlet = ( Data.Entities.Outlet ) value;
-                else throw new ArgumentException ( "Type assigned to Address.ResidentInformation instance is neither of type Person or Outlet" );
-
-            }
-
-        }
-
     }
 
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using PizzaBox.Domain.Models;
 
@@ -166,19 +167,14 @@ namespace PizzaBox.Shell.Utilities {
             owner.Information.DoB = new DateTime ( birthyear, birthmonth, birthday );
 
             business.Save ();
-
-            bizaddr.ResidentInformation = business.Id;
-
             bizaddr.OutletId = business.Id;
             bizaddr.Save ();
             owner.EmployerId = business.Id;
             
             new PizzaBox.Domain.Models.Elements.Customer ( owner.Information ).Save ();
 
-            //owner.PersonId = owner.Information.Id;
-
             owner.Save ();
-            //owneraddr.PersonId = owner.PersonId;
+            owneraddr.PersonId = owner.PersonId;
             owneraddr.Save ();
 
             System.Console.WriteLine ();
@@ -189,6 +185,8 @@ namespace PizzaBox.Shell.Utilities {
         }
 
         public static void RemoveOutletCustomer () {
+
+            var businesses = new PizzaBox.Domain.Models.Businesses ();
 
             Utilities.MainMenu.Banner ();
 
@@ -201,10 +199,15 @@ namespace PizzaBox.Shell.Utilities {
 
         public static void ViewOutletCustomers () {
 
+            var businesses = new PizzaBox.Domain.Models.Businesses ();
+
             Utilities.MainMenu.Banner ();
 
             System.Console.WriteLine ( "View all Outlets" );
             System.Console.ReadLine ();
+
+            foreach ( var business in businesses.ReadAll () )
+                System.Console.WriteLine ( "Company Name: " + business.Name );
 
             MainPrompt ();
 

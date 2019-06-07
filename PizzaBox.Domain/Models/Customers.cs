@@ -26,7 +26,20 @@ namespace PizzaBox.Domain.Models {
 
         }
 
-        protected override HashSet < Elements.Customer > ReadAll () {
+        public Customers () : base () { _resource = ReadAll (); }
+
+        public Customers ( ref Customers addresses ) : base () { _resource = addresses._resource; }
+
+        public Customers ( ref ICollection < Data.Entities.Person > addresses ) {
+
+            foreach ( var index in addresses )
+                _resource.Add ( new Elements.Customer ( index ) );
+
+        }
+
+        public override Elements.Customer Query ( ref Elements.CustomerQuery Index ) { return Read ( Index ); }
+
+        public override HashSet < Elements.Customer > ReadAll () {
 
             using ( var context = new Data.PizzaBoxDbContext () ) { 
 
@@ -40,19 +53,6 @@ namespace PizzaBox.Domain.Models {
             }
 
         }
-
-        public Customers () : base () { _resource = ReadAll (); }
-
-        public Customers ( ref Customers addresses ) : base () { _resource = addresses._resource; }
-
-        public Customers ( ref ICollection < Data.Entities.Person > addresses ) {
-
-            foreach ( var index in addresses )
-                _resource.Add ( new Elements.Customer ( index ) );
-
-        }
-
-        public override Elements.Customer Query ( ref Elements.CustomerQuery Index ) { return Read ( Index ); }
 
     }
 

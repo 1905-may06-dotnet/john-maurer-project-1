@@ -11,9 +11,9 @@ namespace PizzaBox.Domain.Models.IO {
 
         protected abstract T Read ( Ty entityArgs );
 
-        protected abstract HashSet < T > ReadAll ();
-
         public IRead () : base () {}
+
+        public abstract HashSet < T > ReadAll ();
 
     }
 
