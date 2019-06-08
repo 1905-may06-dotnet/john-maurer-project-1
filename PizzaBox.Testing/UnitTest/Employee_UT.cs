@@ -73,8 +73,7 @@ namespace Tests.UnitTest {
 
             records.Records.Add ( record );
 
-            foreach ( var element in records.Records )
-                element.Save ();
+            foreach ( var element in records.Records ) element.Save ();
 
             if ( records.Query ( ref query ) != PizzaBox.Domain.Models.Elements.Employee.Empty )
                 Assert.Pass (); else Assert.Fail ();
@@ -107,13 +106,10 @@ namespace Tests.UnitTest {
             new PizzaBox.Domain.Models.Elements.Customer ( record.Information ).Save ();
 
             record.Save ();
-
-            System.Guid test = record.Id;
-
             record.Delete ();
 
             using ( var context = new PizzaBox.Data.PizzaBoxDbContext () )
-                if ( context.Employees.Find ( test ) == null )
+                if ( context.Employees.Find ( record.Id ) == null )
                     Assert.Pass (); else Assert.Fail ();
 
         }

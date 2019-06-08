@@ -83,7 +83,7 @@ namespace PizzaBox.Domain.Models.Elements {
             lock ( _biz_writeLock ) {
 
                 using ( var context = new Data.PizzaBoxDbContext () ) {
-
+                    
                     context.Remove < Data.Entities.Outlet > ( _resource );
                     context.SaveChanges ();
 
