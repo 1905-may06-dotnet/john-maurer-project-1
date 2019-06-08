@@ -64,19 +64,16 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public override Elements.IElement < Data.Entities.Address > Save () {
 
-            if ( _resource.Id == Guid.Empty || _resource.Id == null ) _resource.Id = Guid.NewGuid ();
-
             lock ( _addr_writeLock ) { 
 
                 using ( var context = new Data.PizzaBoxDbContext () ) {
 
                     if ( context.Addresses.Find ( _resource.Id ) == null ) {
 
-                        context.Entry  ( _resource );
                         context.Attach ( _resource );
                         context.Add < Data.Entities.Address > ( _resource );
 
-                    }
+                    } else context.Update < Data.Entities.Address > ( _resource );
                     
                     context.SaveChanges ();
 

@@ -9,37 +9,20 @@ namespace PizzaBox.Domain.Models {
 
         protected override Elements.Customer Read ( Elements.CustomerQuery entityArgs ) {
 
-            if ( entityArgs == Elements.CustomerQuery.Empty ) return Elements.Customer.Empty; else {
+            using ( var context = new Data.PizzaBoxDbContext () ) {
 
-                using ( var context = new Data.PizzaBoxDbContext () ) {
-
-                    if ( entityArgs.Id != null && entityArgs.Id != Guid.Empty )
-                        return new Elements.Customer ( context.People.Find ( entityArgs.Id ) );
-                    else if ( entityArgs.Email != null && entityArgs.Email != String.Empty )
-                        return new Elements.Customer 
-                            ( ( from rec in context.People where rec.Email == entityArgs.Email select rec ).FirstOrDefault () );
-                    else return Elements.Customer.Empty;
-
-                }
+                if ( entityArgs.Id != null && entityArgs.Id != Guid.Empty )
+                    return new Elements.Customer ( context.People.Find ( entityArgs.Id ) );
+                else if ( entityArgs.Email != null && entityArgs.Email != String.Empty )
+                    return new Elements.Customer 
+                        ( ( from rec in context.People where rec.Email == entityArgs.Email select rec ).FirstOrDefault () );
+                 else return Elements.Customer.Empty;
 
             }
 
         }
 
-        public Customers () : base () { _resource = ReadAll (); }
-
-        public Customers ( ref Customers addresses ) : base () { _resource = addresses._resource; }
-
-        public Customers ( ref ICollection < Data.Entities.Person > addresses ) {
-
-            foreach ( var index in addresses )
-                _resource.Add ( new Elements.Customer ( index ) );
-
-        }
-
-        public override Elements.Customer Query ( ref Elements.CustomerQuery Index ) { return Read ( Index ); }
-
-        public override HashSet < Elements.Customer > ReadAll () {
+        protected override HashSet < Elements.Customer > ReadAll () {
 
             using ( var context = new Data.PizzaBoxDbContext () ) { 
 
@@ -53,6 +36,10 @@ namespace PizzaBox.Domain.Models {
             }
 
         }
+
+        public Customers () : base () {}
+
+        public override Elements.Customer Query ( ref Elements.CustomerQuery Index ) { return Read ( Index ); }
 
     }
 

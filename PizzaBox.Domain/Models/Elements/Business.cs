@@ -39,34 +39,16 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public override Elements.IElement < Data.Entities.Outlet > Save () {
 
-            if ( _resource.Id == Guid.Empty || _resource.Id == null ) _resource.Id = Guid.NewGuid ();
-
-            foreach ( var address in _resource.Addresses )
-                if ( address.Id == Guid.Empty || address.Id == null ) address.Id = Guid.NewGuid ();
-
-            foreach ( var employee in _resource.Employees )
-                if ( employee.Id == Guid.Empty || employee.Id == null ) employee.Id = Guid.NewGuid ();
-
-            foreach ( var feature in _resource.Features )
-                if ( feature.Id == Guid.Empty || feature.Id == null ) feature.Id = Guid.NewGuid ();
-
-            foreach ( var item in _resource.Items )
-                if ( item.Id == Guid.Empty || item.Id == null ) item.Id = Guid.NewGuid ();
-
-            foreach ( var order in _resource.Orders )
-                if ( order.Id == Guid.Empty || order.Id == null ) order.Id = Guid.NewGuid ();
-
             lock ( _biz_writeLock ) {
 
                 using ( var context = new Data.PizzaBoxDbContext () ) {
 
                     if ( context.Outlets.Find ( _resource.Id ) == null ) {
 
-                        context.Entry  ( _resource );
                         context.Attach ( _resource );
                         context.Add < Data.Entities.Outlet > ( _resource );
 
-                    }
+                    } else context.Update < Data.Entities.Outlet > ( _resource );
 
                     context.SaveChanges ();
 

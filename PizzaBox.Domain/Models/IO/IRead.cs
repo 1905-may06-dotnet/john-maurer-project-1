@@ -5,15 +5,15 @@ using System.Text;
 
 namespace PizzaBox.Domain.Models.IO {
 
-    public abstract class IRead < T, Ty > : IModel < HashSet < T > >
+    public abstract class IRead < T, Ty >
         where T: new ()
         where Ty: EventArgs, new () {
 
         protected abstract T Read ( Ty entityArgs );
 
-        public IRead () : base () {}
+        protected abstract HashSet < T > ReadAll ();
 
-        public abstract HashSet < T > ReadAll ();
+        public IRead () : base () {}
 
     }
 

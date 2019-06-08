@@ -41,9 +41,6 @@ namespace PizzaBox.Domain.Models.Elements {
         public override Elements.IElement < Data.Entities.Person > Save () {
 
             if ( _resource.Id == Guid.Empty || _resource.Id == null ) _resource.Id = Guid.NewGuid ();
-            
-            foreach ( var address in _resource.Addresses )
-                if ( address.PersonId == Guid.Empty || address.PersonId == null ) address.PersonId = Guid.NewGuid ();
 
             lock ( _cust_writeLock ) {
 
@@ -51,11 +48,10 @@ namespace PizzaBox.Domain.Models.Elements {
 
                     if ( context.People.Find ( _resource.Id ) == null ) {
 
-                        context.Entry ( _resource );
                         context.Attach < Data.Entities.Person > ( _resource );
                         context.Add < Data.Entities.Person > ( _resource );
 
-                    }
+                    } else context.Update < Data.Entities.Person > ( _resource );
 
                     context.SaveChanges ();
 

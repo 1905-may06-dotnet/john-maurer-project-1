@@ -39,19 +39,17 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public override Elements.IElement < Data.Entities.StateTax > Save () {
 
-            if ( _resource.Id == Guid.Empty || _resource.Id == null ) _resource.Id = Guid.NewGuid ();
-
             lock ( _tax_writeLock ) {
 
                 using ( var context = new Data.PizzaBoxDbContext () ) {    
 
                     if ( context.StateTaxes.Find ( _resource.Id ) == null ) {
 
-                        context.Entry  ( _resource );
+                        context.Entry ( _resource );
                         context.Attach ( _resource );
                         context.Add < Data.Entities.StateTax > ( _resource );
 
-                    }
+                    } else context.Update < Data.Entities.StateTax > ( _resource );
 
                     context.SaveChanges ();
 

@@ -83,85 +83,85 @@ namespace PizzaBox.Shell.Utilities {
             System.Console.WriteLine ( "Outlet Location - {0}", business.Name );
 
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 1 ] );
+            System.Console.Write ( prompts [ 1 ] );
             bizaddr.City = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 2 ] );
+            System.Console.Write ( prompts [ 2 ] );
             bizaddr.State = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 3 ] );
+            System.Console.Write ( prompts [ 3 ] );
             bizaddr.Street = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 4 ] );
+            System.Console.Write ( prompts [ 4 ] );
             bizaddr.Zip = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 5 ] );
+            System.Console.Write ( prompts [ 5 ] );
             bizaddr.Apartment = System.Console.ReadLine ();
-            System.Console.WriteLine ();
 
             Banner ();
 
             System.Console.WriteLine ( "Owner Personal Information - {0}", business.Name );
 
-            System.Console.WriteLine ( prompts [ 6 ] );
+            System.Console.WriteLine ();
+            System.Console.Write ( prompts [ 6 ] );
             owner.Information.Fname = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 7 ] );
+            System.Console.Write ( prompts [ 7 ] );
             owner.Information.Mname = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 8 ] );
+            System.Console.Write ( prompts [ 8 ] );
             owner.Information.Lname = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 9 ] );
+            System.Console.Write ( prompts [ 9 ] );
             owner.Information.Email = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 10 ] );
+            System.Console.Write ( prompts [ 10 ] );
             owner.Information.Phone = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 11 ] );
+            System.Console.Write ( prompts [ 11 ] );
             birthday = Convert.ToInt32 ( System.Console.ReadLine () );
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 12 ] );
+            System.Console.Write ( prompts [ 12 ] );
             birthmonth = Convert.ToInt32 ( System.Console.ReadLine () );
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 13 ] );
+            System.Console.Write ( prompts [ 13 ] );
             birthyear = Convert.ToInt32 ( System.Console.ReadLine () );
-            System.Console.WriteLine ();
 
             Banner ();
 
             System.Console.WriteLine ( "Owner Personal Information - Location - {0}", business.Name );
 
-            System.Console.WriteLine ( prompts [ 14 ] );
+            System.Console.WriteLine ();
+            System.Console.Write ( prompts [ 14 ] );
             owneraddr.City = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 15 ] );
+            System.Console.Write ( prompts [ 15 ] );
             owneraddr.State = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 16 ] );
+            System.Console.Write ( prompts [ 16 ] );
             owneraddr.Street = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 17 ] );
+            System.Console.Write ( prompts [ 17 ] );
             owneraddr.Zip = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 18 ] );
+            System.Console.Write ( prompts [ 18 ] );
             owneraddr.Apartment = System.Console.ReadLine ();
-            System.Console.WriteLine ();
 
             Banner ();
 
             System.Console.WriteLine ( "Owner Personal Information - Profile - {0}", business.Name );
 
-            System.Console.WriteLine ( prompts [ 19 ] );
+            System.Console.WriteLine ();
+            System.Console.Write ( prompts [ 19 ] );
             owner.Username = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 20 ] );
+            System.Console.Write ( prompts [ 20 ] );
             owner.Password = System.Console.ReadLine ();
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 21 ] );
+            System.Console.Write ( prompts [ 21 ] );
             owner.Wage = Convert.ToDouble ( System.Console.ReadLine () );
             System.Console.WriteLine ();
-            System.Console.WriteLine ( prompts [ 22 ] );
+            System.Console.Write ( prompts [ 22 ] );
             owner.Information.Gender = System.Console.ReadLine ().ToLower () == "male" ? false : true;
 
             owner.Information.DoB = new DateTime ( birthyear, birthmonth, birthday );
@@ -169,16 +169,22 @@ namespace PizzaBox.Shell.Utilities {
             business.Save ();
             bizaddr.OutletId = business.Id;
             bizaddr.Save ();
-            owner.EmployerId = business.Id;
-            
+
             new PizzaBox.Domain.Models.Elements.Customer ( owner.Information ).Save ();
 
+            owner.EmployerId = business.Id;
+
             owner.Save ();
-            owneraddr.PersonId = owner.PersonId;
+
+            owneraddr.PersonId = owner.Information.Id;
+            owneraddr.OutletId = business.Id;
+            
+            //owneraddr.OutletId = owner.EmployerId;
             owneraddr.Save ();
 
             System.Console.WriteLine ();
-            System.Console.WriteLine ( "saved..." );
+            System.Console.WriteLine ( "Saved, press enter key to continue..." );
+            System.Console.ReadLine ();
 
             MainPrompt ();
 
@@ -203,11 +209,14 @@ namespace PizzaBox.Shell.Utilities {
 
             Utilities.MainMenu.Banner ();
 
-            System.Console.WriteLine ( "View all Outlets" );
-            System.Console.ReadLine ();
+            System.Console.WriteLine ( "View all Outlets\n" );
 
-            foreach ( var business in businesses.ReadAll () )
+            foreach ( var business in businesses.Records )
                 System.Console.WriteLine ( "Company Name: " + business.Name );
+
+            Console.WriteLine ( "\n\nPress the enter key to return the main menu..." );
+
+            System.Console.ReadLine ();
 
             MainPrompt ();
 
