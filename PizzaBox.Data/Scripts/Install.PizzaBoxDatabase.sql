@@ -9,29 +9,26 @@ GO
 -- Dropping existing FOREIGN KEY constraints
 -- --------------------------------------------------
 
-IF OBJECT_ID(N'[PizzaBoxDbSchema].[FK_PersonAddress]', 'F') IS NOT NULL
-    ALTER TABLE [PizzaBoxDbSchema].[Addresses] DROP CONSTRAINT [FK_PersonAddress];
-GO
 IF OBJECT_ID(N'[PizzaBoxDbSchema].[FK_OutletAddress]', 'F') IS NOT NULL
     ALTER TABLE [PizzaBoxDbSchema].[Addresses] DROP CONSTRAINT [FK_OutletAddress];
 GO
 IF OBJECT_ID(N'[PizzaBoxDbSchema].[FK_OutletOrder]', 'F') IS NOT NULL
     ALTER TABLE [PizzaBoxDbSchema].[Orders] DROP CONSTRAINT [FK_OutletOrder];
 GO
-IF OBJECT_ID(N'[PizzaBoxDbSchema].[FK_PersonOrder]', 'F') IS NOT NULL
-    ALTER TABLE [PizzaBoxDbSchema].[Orders] DROP CONSTRAINT [FK_PersonOrder];
-GO
-IF OBJECT_ID(N'[PizzaBoxDbSchema].[FK_OutletFeature]', 'F') IS NOT NULL
-    ALTER TABLE [PizzaBoxDbSchema].[Features] DROP CONSTRAINT [FK_OutletFeature];
-GO
-IF OBJECT_ID(N'[PizzaBoxDbSchema].[FK_OutletItem]', 'F') IS NOT NULL
-    ALTER TABLE [PizzaBoxDbSchema].[Items] DROP CONSTRAINT [FK_OutletItem];
-GO
 IF OBJECT_ID(N'[PizzaBoxDbSchema].[FK_EmployeeOutlet]', 'F') IS NOT NULL
     ALTER TABLE [PizzaBoxDbSchema].[Employees] DROP CONSTRAINT [FK_EmployeeOutlet];
 GO
 IF OBJECT_ID(N'[PizzaBoxDbSchema].[FK_EmployeePerson]', 'F') IS NOT NULL
     ALTER TABLE [PizzaBoxDbSchema].[Employees] DROP CONSTRAINT [FK_EmployeePerson];
+GO
+IF OBJECT_ID(N'[PizzaBoxDbSchema].[FK_OrderAddress]', 'F') IS NOT NULL
+    ALTER TABLE [PizzaBoxDbSchema].[Addresses] DROP CONSTRAINT [FK_OrderAddress];
+GO
+IF OBJECT_ID(N'[PizzaBoxDbSchema].[FK_OutletItem]', 'F') IS NOT NULL
+    ALTER TABLE [PizzaBoxDbSchema].[Items] DROP CONSTRAINT [FK_OutletItem];
+GO
+IF OBJECT_ID(N'[PizzaBoxDbSchema].[FK_PersonAddress]', 'F') IS NOT NULL
+    ALTER TABLE [PizzaBoxDbSchema].[Addresses] DROP CONSTRAINT [FK_PersonAddress];
 GO
 
 -- --------------------------------------------------
@@ -43,9 +40,6 @@ IF OBJECT_ID(N'[PizzaBoxDbSchema].[People]', 'U') IS NOT NULL
 GO
 IF OBJECT_ID(N'[PizzaBoxDbSchema].[Addresses]', 'U') IS NOT NULL
     DROP TABLE [PizzaBoxDbSchema].[Addresses];
-GO
-IF OBJECT_ID(N'[PizzaBoxDbSchema].[Features]', 'U') IS NOT NULL
-    DROP TABLE [PizzaBoxDbSchema].[Features];
 GO
 IF OBJECT_ID(N'[PizzaBoxDbSchema].[Items]', 'U') IS NOT NULL
     DROP TABLE [PizzaBoxDbSchema].[Items];
@@ -89,16 +83,9 @@ CREATE TABLE [PizzaBoxDbSchema].[Addresses] (
     [City] nvarchar(max)  NOT NULL,
     [Street] nvarchar(max)  NOT NULL,
     [Zip] nvarchar(max)  NOT NULL,
-    [Apt] nvarchar(max)  NULL
-);
-GO
-
--- Creating table 'Features'
-CREATE TABLE [PizzaBoxDbSchema].[Features] (
-    [Id] uniqueidentifier  NOT NULL,
-    [OutletId] uniqueidentifier  NULL,
-    [Name] nvarchar(max)  NOT NULL,
-    [Cost] float  NOT NULL
+    [Apt] nvarchar(max)  NULL,
+    [Order_Id] uniqueidentifier  NULL,
+    [Person_Id] uniqueidentifier  NULL
 );
 GO
 
@@ -116,7 +103,6 @@ GO
 CREATE TABLE [PizzaBoxDbSchema].[Orders] (
     [Id] uniqueidentifier  NOT NULL,
     [OutletId] uniqueidentifier  NULL,
-    [PersonId] uniqueidentifier  NULL,
     [DateOrdered] datetime  NOT NULL,
     [Items] nvarchar(max)  NOT NULL,
     [SubTotal] float  NOT NULL,
@@ -169,12 +155,6 @@ ADD CONSTRAINT [PK_Addresses]
     PRIMARY KEY CLUSTERED ([Id] ASC);
 GO
 
--- Creating primary key on [Id] in table 'Features'
-ALTER TABLE [PizzaBoxDbSchema].[Features]
-ADD CONSTRAINT [PK_Features]
-    PRIMARY KEY CLUSTERED ([Id] ASC);
-GO
-
 -- Creating primary key on [Id] in table 'Items'
 ALTER TABLE [PizzaBoxDbSchema].[Items]
 ADD CONSTRAINT [PK_Items]
@@ -209,21 +189,6 @@ GO
 -- Creating all FOREIGN KEY constraints
 -- --------------------------------------------------
 
--- Creating foreign key on [PersonId] in table 'Addresses'
-ALTER TABLE [PizzaBoxDbSchema].[Addresses]
-ADD CONSTRAINT [FK_PersonAddress]
-    FOREIGN KEY ([PersonId])
-    REFERENCES [PizzaBoxDbSchema].[People]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PersonAddress'
-CREATE INDEX [IX_FK_PersonAddress]
-ON [PizzaBoxDbSchema].[Addresses]
-    ([PersonId]);
-GO
-
 -- Creating foreign key on [OutletId] in table 'Addresses'
 ALTER TABLE [PizzaBoxDbSchema].[Addresses]
 ADD CONSTRAINT [FK_OutletAddress]
@@ -251,51 +216,6 @@ GO
 -- Creating non-clustered index for FOREIGN KEY 'FK_OutletOrder'
 CREATE INDEX [IX_FK_OutletOrder]
 ON [PizzaBoxDbSchema].[Orders]
-    ([OutletId]);
-GO
-
--- Creating foreign key on [PersonId] in table 'Orders'
-ALTER TABLE [PizzaBoxDbSchema].[Orders]
-ADD CONSTRAINT [FK_PersonOrder]
-    FOREIGN KEY ([PersonId])
-    REFERENCES [PizzaBoxDbSchema].[People]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_PersonOrder'
-CREATE INDEX [IX_FK_PersonOrder]
-ON [PizzaBoxDbSchema].[Orders]
-    ([PersonId]);
-GO
-
--- Creating foreign key on [OutletId] in table 'Features'
-ALTER TABLE [PizzaBoxDbSchema].[Features]
-ADD CONSTRAINT [FK_OutletFeature]
-    FOREIGN KEY ([OutletId])
-    REFERENCES [PizzaBoxDbSchema].[Outlets]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_OutletFeature'
-CREATE INDEX [IX_FK_OutletFeature]
-ON [PizzaBoxDbSchema].[Features]
-    ([OutletId]);
-GO
-
--- Creating foreign key on [OutletId] in table 'Items'
-ALTER TABLE [PizzaBoxDbSchema].[Items]
-ADD CONSTRAINT [FK_OutletItem]
-    FOREIGN KEY ([OutletId])
-    REFERENCES [PizzaBoxDbSchema].[Outlets]
-        ([Id])
-    ON DELETE NO ACTION ON UPDATE NO ACTION;
-GO
-
--- Creating non-clustered index for FOREIGN KEY 'FK_OutletItem'
-CREATE INDEX [IX_FK_OutletItem]
-ON [PizzaBoxDbSchema].[Items]
     ([OutletId]);
 GO
 
@@ -329,9 +249,50 @@ ON [PizzaBoxDbSchema].[Employees]
     ([Person_Id]);
 GO
 
--- --------------------------------------------------
--- Script has ended
--- --------------------------------------------------
+-- Creating foreign key on [Order_Id] in table 'Addresses'
+ALTER TABLE [PizzaBoxDbSchema].[Addresses]
+ADD CONSTRAINT [FK_OrderAddress]
+    FOREIGN KEY ([Order_Id])
+    REFERENCES [PizzaBoxDbSchema].[Orders]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OrderAddress'
+CREATE INDEX [IX_FK_OrderAddress]
+ON [PizzaBoxDbSchema].[Addresses]
+    ([Order_Id]);
+GO
+
+-- Creating foreign key on [OutletId] in table 'Items'
+ALTER TABLE [PizzaBoxDbSchema].[Items]
+ADD CONSTRAINT [FK_OutletItem]
+    FOREIGN KEY ([OutletId])
+    REFERENCES [PizzaBoxDbSchema].[Outlets]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_OutletItem'
+CREATE INDEX [IX_FK_OutletItem]
+ON [PizzaBoxDbSchema].[Items]
+    ([OutletId]);
+GO
+
+-- Creating foreign key on [Person_Id] in table 'Addresses'
+ALTER TABLE [PizzaBoxDbSchema].[Addresses]
+ADD CONSTRAINT [FK_PersonAddress]
+    FOREIGN KEY ([Person_Id])
+    REFERENCES [PizzaBoxDbSchema].[People]
+        ([Id])
+    ON DELETE NO ACTION ON UPDATE NO ACTION;
+GO
+
+-- Creating non-clustered index for FOREIGN KEY 'FK_PersonAddress'
+CREATE INDEX [IX_FK_PersonAddress]
+ON [PizzaBoxDbSchema].[Addresses]
+    ([Person_Id]);
+GO
 
 -- --------------------------------------------------
 -- State/Territory Inserts

@@ -20,12 +20,19 @@ namespace PizzaBox.Data.Entities
         [Required]
         public string Zip { get; set; }
         public string Apt { get; set; }
+        [Column("Order_Id")]
+        public Guid? OrderId { get; set; }
+        [Column("Person_Id")]
+        public Guid? PersonId1 { get; set; }
 
+        [ForeignKey("OrderId")]
+        [InverseProperty("Addresses")]
+        public virtual Order Order { get; set; }
         [ForeignKey("OutletId")]
         [InverseProperty("Addresses")]
         public virtual Outlet Outlet { get; set; }
-        [ForeignKey("PersonId")]
+        [ForeignKey("PersonId1")]
         [InverseProperty("Addresses")]
-        public virtual Person Person { get; set; }
+        public virtual Person PersonId1Navigation { get; set; }
     }
 }

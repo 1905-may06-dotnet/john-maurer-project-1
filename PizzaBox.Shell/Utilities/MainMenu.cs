@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using PizzaBox.Domain.Models;
 
 namespace PizzaBox.Shell.Utilities {
@@ -18,9 +16,9 @@ namespace PizzaBox.Shell.Utilities {
 
         private static void Banner () {
 
-            System.Console.Clear ();
+            Console.Clear ();
 
-            System.Console.WriteLine ( "PizzaBox.Shell - Outlet Manager\n\n" );
+            Console.WriteLine ( "PizzaBox.Shell - Outlet Manager\n\n" );
 
         }
 
@@ -73,131 +71,165 @@ namespace PizzaBox.Shell.Utilities {
             owner.WageType = "salary";
             owner.Information = new Data.Entities.Person ();
 
-            System.Console.WriteLine ( "Create Outlet\n" );
+            Console.WriteLine ( "Create Outlet\n" );
 
-            System.Console.WriteLine ( prompts [ 0 ] );
-            business.Name = System.Console.ReadLine ();
-
-            Banner ();
-
-            System.Console.WriteLine ( "Outlet Location - {0}", business.Name );
-
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 1 ] );
-            bizaddr.City = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 2 ] );
-            bizaddr.State = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 3 ] );
-            bizaddr.Street = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 4 ] );
-            bizaddr.Zip = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 5 ] );
-            bizaddr.Apartment = System.Console.ReadLine ();
+            Console.Write ( prompts [ 0 ] );
+            business.Name = Console.ReadLine ();
 
             Banner ();
 
-            System.Console.WriteLine ( "Owner Personal Information - {0}", business.Name );
+            Console.WriteLine ( "Outlet Location - {0}", business.Name );
 
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 6 ] );
-            owner.Information.Fname = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 7 ] );
-            owner.Information.Mname = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 8 ] );
-            owner.Information.Lname = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 9 ] );
-            owner.Information.Email = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 10 ] );
-            owner.Information.Phone = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 11 ] );
-            birthday = Convert.ToInt32 ( System.Console.ReadLine () );
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 12 ] );
-            birthmonth = Convert.ToInt32 ( System.Console.ReadLine () );
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 13 ] );
-            birthyear = Convert.ToInt32 ( System.Console.ReadLine () );
+            Console.WriteLine ();
+            Console.Write ( prompts [ 1 ] );
+            bizaddr.City = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 2 ] );
+            bizaddr.State = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 3 ] );
+            bizaddr.Street = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 4 ] );
+            bizaddr.Zip = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 5 ] );
+            bizaddr.Apartment = Console.ReadLine ();
 
             Banner ();
 
-            System.Console.WriteLine ( "Owner Personal Information - Location - {0}", business.Name );
+            Console.WriteLine ( "Owner Personal Information - {0}", business.Name );
 
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 14 ] );
-            owneraddr.City = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 15 ] );
-            owneraddr.State = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 16 ] );
-            owneraddr.Street = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 17 ] );
-            owneraddr.Zip = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 18 ] );
-            owneraddr.Apartment = System.Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 6 ] );
+            owner.Information.Fname = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 7 ] );
+            owner.Information.Mname = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 8 ] );
+            owner.Information.Lname = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 9 ] );
+            owner.Information.Email = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 10 ] );
+            owner.Information.Phone = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 11 ] );
+            birthday = Convert.ToInt32 ( Console.ReadLine () );
+            Console.WriteLine ();
+            Console.Write ( prompts [ 12 ] );
+            birthmonth = Convert.ToInt32 ( Console.ReadLine () );
+            Console.WriteLine ();
+            Console.Write ( prompts [ 13 ] );
+            birthyear = Convert.ToInt32 ( Console.ReadLine () );
 
             Banner ();
 
-            System.Console.WriteLine ( "Owner Personal Information - Profile - {0}", business.Name );
+            Console.WriteLine ( "Owner Personal Information - Location - {0}", business.Name );
 
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 19 ] );
-            owner.Username = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 20 ] );
-            owner.Password = System.Console.ReadLine ();
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 21 ] );
-            owner.Wage = Convert.ToDouble ( System.Console.ReadLine () );
-            System.Console.WriteLine ();
-            System.Console.Write ( prompts [ 22 ] );
-            owner.Information.Gender = System.Console.ReadLine ().ToLower () == "male" ? false : true;
+            Console.WriteLine ();
+            Console.Write ( prompts [ 14 ] );
+            owneraddr.City = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 15 ] );
+            owneraddr.State = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 16 ] );
+            owneraddr.Street = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 17 ] );
+            owneraddr.Zip = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 18 ] );
+            owneraddr.Apartment = Console.ReadLine ();
+
+            Banner ();
+
+            Console.WriteLine ( "Owner Personal Information - Profile - {0}", business.Name );
+
+            Console.WriteLine ();
+            Console.Write ( prompts [ 19 ] );
+            owner.Username = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 20 ] );
+            owner.Password = Console.ReadLine ();
+            Console.WriteLine ();
+            Console.Write ( prompts [ 21 ] );
+            owner.Wage = Convert.ToDouble ( Console.ReadLine () );
+            Console.WriteLine ();
+            Console.Write ( prompts [ 22 ] );
+            owner.Information.Gender = Console.ReadLine ().ToLower () == "male" ? false : true;
 
             owner.Information.DoB = new DateTime ( birthyear, birthmonth, birthday );
 
             business.Save ();
+
             bizaddr.OutletId = business.Id;
+
             bizaddr.Save ();
 
-            new PizzaBox.Domain.Models.Elements.Customer ( owner.Information ).Save ();
+            new Domain.Models.Elements.Customer ( owner.Information ).Save ();
 
             owner.EmployerId = business.Id;
 
             owner.Save ();
 
-            owneraddr.PersonId = owner.Information.Id;
+            owneraddr.PersonId = owner.PersonId;
             owneraddr.OutletId = business.Id;
             
-            //owneraddr.OutletId = owner.EmployerId;
             owneraddr.Save ();
-
-            System.Console.WriteLine ();
-            System.Console.WriteLine ( "Saved, press enter key to continue..." );
-            System.Console.ReadLine ();
-
-            MainPrompt ();
 
         }
 
         public static void RemoveOutletCustomer () {
 
-            var businesses = new PizzaBox.Domain.Models.Businesses ();
+            var businesses = new Businesses ();
 
-            Utilities.MainMenu.Banner ();
+            var records      = businesses.Records;
+            var index        = string.Empty;
+            var confirmation = "Name not Found";
 
-            System.Console.WriteLine ( "Remove Outlet" );
-            System.Console.ReadLine ();
+            Banner ();
+
+            Console.WriteLine ( "Remove Outlet\n" );
+            Console.WriteLine ( "Type the name of the Outlet to Delete, press enter to continue\n" );
+
+            foreach ( var record in records )
+                Console.WriteLine ( "Company Name: " + record.Name );
+
+            Console.Write ( "\nSelection: " );
+
+            index = Console.ReadLine ();
+
+            foreach ( var record in records ) {
+
+                if ( record.Name.ToLower () == index.ToLower () ) {
+
+                    var items     = new Products ();
+                    var orders    = new Orders ();
+                    var employees = new Employees ();
+                    
+                    record.Delete ();
+
+                    foreach ( var element in items.Records ) if ( element.OutletId == null )
+                        new Domain.Models.Elements.Product ( element ).Delete ();
+
+                    foreach ( var element in orders.Records ) if ( element.OutletId == null )
+                        new Domain.Models.Elements.Order ( element ).Delete ();
+
+                    foreach ( var element in employees.Records ) if ( element.EmployerId == null )
+                        new Domain.Models.Elements.Employee ( element ).Delete ();
+
+                    confirmation = "Outlet record has been deleted, press enter to continue";
+
+                }
+
+            }
+
+            Console.WriteLine ( confirmation );
+            Console.ReadLine ();
 
             MainPrompt ();
 
@@ -205,20 +237,13 @@ namespace PizzaBox.Shell.Utilities {
 
         public static void ViewOutletCustomers () {
 
-            var businesses = new PizzaBox.Domain.Models.Businesses ();
+            var businesses = new Businesses ();
 
-            Utilities.MainMenu.Banner ();
+            Banner ();
 
-            System.Console.WriteLine ( "View all Outlets\n" );
+            Console.WriteLine ( "View all Outlets\n" );
 
-            foreach ( var business in businesses.Records )
-                System.Console.WriteLine ( "Company Name: " + business.Name );
-
-            Console.WriteLine ( "\n\nPress the enter key to return the main menu..." );
-
-            System.Console.ReadLine ();
-
-            MainPrompt ();
+            foreach ( var business in businesses.Records ) Console.WriteLine ( "Company Name: " + business.Name );
 
         }
 
@@ -228,12 +253,12 @@ namespace PizzaBox.Shell.Utilities {
 
             do { 
 
-                Utilities.MainMenu.Banner ();
+                Banner ();
 
-                System.Console.WriteLine ( "1) Create Outlet\n2) Remove Outlet\n3) View Outlets\n\nEnter, 'exit', to close shell\n\nSelection - " );
-                selection = System.Console.ReadLine ();
+                Console.Write ( "1) Create Outlet\n2) Remove Outlet\n3) View Outlets\n\nEnter, 'exit', to close shell\n\nSelection:  " );
+                selection = Console.ReadLine ();
 
-                System.Console.Clear ();
+                Console.Clear ();
 
             } while ( ! MainPromptIsValid ( selection ) );
 

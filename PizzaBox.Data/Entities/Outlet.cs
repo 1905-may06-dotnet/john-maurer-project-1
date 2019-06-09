@@ -12,7 +12,6 @@ namespace PizzaBox.Data.Entities
         {
             Addresses = new HashSet<Address>();
             Employees = new HashSet<Employee>();
-            Features = new HashSet<Feature>();
             Items = new HashSet<Item>();
             Orders = new HashSet<Order>();
         }
@@ -25,8 +24,6 @@ namespace PizzaBox.Data.Entities
         public virtual ICollection<Address> Addresses { get; set; }
         [InverseProperty("Outlet")]
         public virtual ICollection<Employee> Employees { get; set; }
-        [InverseProperty("Outlet")]
-        public virtual ICollection<Feature> Features { get; set; }
         [InverseProperty("Outlet")]
         public virtual ICollection<Item> Items { get; set; }
         [InverseProperty("Outlet")]

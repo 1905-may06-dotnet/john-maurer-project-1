@@ -12,7 +12,6 @@ namespace PizzaBox.Data.Entities
         {
             Addresses = new HashSet<Address>();
             Employees = new HashSet<Employee>();
-            Orders = new HashSet<Order>();
         }
 
         public Guid Id { get; set; }
@@ -31,11 +30,9 @@ namespace PizzaBox.Data.Entities
         public string Phone { get; set; }
         public string Email { get; set; }
 
-        [InverseProperty("Person")]
+        [InverseProperty("PersonId1Navigation")]
         public virtual ICollection<Address> Addresses { get; set; }
         [InverseProperty("Person")]
         public virtual ICollection<Employee> Employees { get; set; }
-        [InverseProperty("Person")]
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }

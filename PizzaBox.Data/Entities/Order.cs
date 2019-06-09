@@ -8,9 +8,13 @@ namespace PizzaBox.Data.Entities
     [Table("Orders", Schema = "PizzaBoxDbSchema")]
     public partial class Order
     {
+        public Order()
+        {
+            Addresses = new HashSet<Address>();
+        }
+
         public Guid Id { get; set; }
         public Guid? OutletId { get; set; }
-        public Guid? PersonId { get; set; }
         [Column(TypeName = "datetime")]
         public DateTime DateOrdered { get; set; }
         [Required]
@@ -21,8 +25,7 @@ namespace PizzaBox.Data.Entities
         [ForeignKey("OutletId")]
         [InverseProperty("Orders")]
         public virtual Outlet Outlet { get; set; }
-        [ForeignKey("PersonId")]
-        [InverseProperty("Orders")]
-        public virtual Person Person { get; set; }
+        [InverseProperty("Order")]
+        public virtual ICollection<Address> Addresses { get; set; }
     }
 }

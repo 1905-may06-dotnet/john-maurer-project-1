@@ -14,8 +14,6 @@ namespace PizzaBox.Domain.Models {
                 if ( entityArgs.Id != null && entityArgs.Id != Guid.Empty ) return new Elements.Order ( context.Orders.Find ( entityArgs.Id ) );
                 else if ( entityArgs.OutletId != null && entityArgs.OutletId != Guid.Empty ) return new Elements.Order 
                         ( ( from rec in context.Orders where rec.OutletId == entityArgs.OutletId select rec ).FirstOrDefault () );
-                else if ( entityArgs.PersonId != null && entityArgs.PersonId != Guid.Empty ) return new Elements.Order 
-                        ( ( from rec in context.Orders where rec.PersonId == entityArgs.PersonId select rec ).FirstOrDefault () );
                 else if ( entityArgs.DateOrdered != null ) return new Elements.Order 
                         ( ( from rec in context.Orders where rec.DateOrdered == entityArgs.DateOrdered select rec ).FirstOrDefault () );
                 else return Elements.Order.Empty;

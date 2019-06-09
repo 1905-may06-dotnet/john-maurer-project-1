@@ -83,11 +83,11 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public Guid PersonId { get { return _resource.PersonId; } set { _resource.PersonId = value; } }
 
+        public Guid? EmployerId { get { return _resource.OutletId; } set { _resource.OutletId = value; } }
+
         public Data.Entities.Person Information { get { return _resource.Person; } set { _resource.Person = value; } }
 
         public Data.Entities.Outlet Employer { get { return _resource.Outlet; } set { _resource.Outlet = value; } }
-
-        public Guid? EmployerId { get { return _resource.OutletId; } set { _resource.OutletId = value; } }
 
         public string Username { get { return _resource.Username; } set { _resource.Username = value; } }
 

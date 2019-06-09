@@ -105,13 +105,6 @@ namespace PizzaBox.Domain.Models.Elements {
 
         }
 
-        public ICollection < Data.Entities.Order > Orders {
-
-            get { return _resource.Orders; }
-            set { _resource.Orders = value; }
-
-        }
-
     }
 
 }

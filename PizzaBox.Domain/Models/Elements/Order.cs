@@ -90,8 +90,6 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public Guid? OutletId { get { return _resource.OutletId; } set { _resource.OutletId = value; } }
 
-        public Guid? PersonId { get { return _resource.PersonId; } set { _resource.PersonId = value; } }
-
         public string Items { get { return _resource.Items; } set { _resource.Items = value; } }
 
         public DateTime OrderDate { get { return _resource.DateOrdered; } set { _resource.DateOrdered = value; } }
@@ -104,13 +102,6 @@ namespace PizzaBox.Domain.Models.Elements {
 
             get { return _resource.Outlet; }
             set { _resource.Outlet = value; }
-
-        }
-
-        public Data.Entities.Person Customer {
-
-            get { return _resource.Person; }
-            set { _resource.Person = value; }
 
         }
 

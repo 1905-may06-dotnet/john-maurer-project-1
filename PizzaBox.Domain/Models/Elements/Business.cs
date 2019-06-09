@@ -65,7 +65,39 @@ namespace PizzaBox.Domain.Models.Elements {
             lock ( _biz_writeLock ) {
 
                 using ( var context = new Data.PizzaBoxDbContext () ) {
-                    
+
+                    foreach ( var element in context.Items ) if ( element.OutletId == _resource.Id ) {
+
+                        context.Attach ( _resource ).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                        context.Remove ( _resource );
+
+                    }
+
+                    foreach ( var element in context.Orders ) if ( element.OutletId == _resource.Id ) {
+
+                        context.Attach ( element ).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                        context.Remove ( element );
+
+                    }
+
+                    foreach ( var element in context.Employees ) if ( element.OutletId == element.Id ) {
+
+                        var information = element.Person;
+
+                        context.Attach ( element ).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                        context.Remove ( element );
+                        context.Attach ( information ).State = Microsoft.EntityFrameworkCore.EntityState.Deleted;
+                        context.Remove ( information );
+
+                    }
+
+                    foreach ( var location in context.Addresses ) if ( location.OutletId != _resource.Id ) {
+
+                        context.Attach ( location );
+                        context.Remove ( location );
+
+                    }
+
                     context.Remove < Data.Entities.Outlet > ( _resource );
                     context.SaveChanges ();
 
@@ -94,13 +126,6 @@ namespace PizzaBox.Domain.Models.Elements {
 
             get { return _resource.Items; }
             set { _resource.Items = value; }
-
-        }
-
-        public ICollection < Data.Entities.Feature > Features {
-
-            get { return _resource.Features; }
-            set { _resource.Features = value; }
 
         }
 

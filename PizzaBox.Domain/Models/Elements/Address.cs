@@ -52,8 +52,7 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public Address () : base () {
 
-            _resource = new Data.Entities.Address ();
-
+            _resource    = new Data.Entities.Address ();
             _resource.Id = Guid.NewGuid ();
 
         }
@@ -106,7 +105,7 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public Guid? OutletId { get { return OutletId; } set { _resource.OutletId = value; } }
 
-        public Guid? PersonId { get { return PersonId; } set { _resource.OutletId = value; } }
+        public Guid? PersonId { get { return PersonId; } set { _resource.PersonId = value; } }
 
         public Guid? ResidentId {
 
