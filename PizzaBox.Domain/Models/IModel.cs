@@ -18,8 +18,6 @@ namespace PizzaBox.Domain.Models {
 
         public Status HasChanged = Status.Unchanged;
 
-        public IModel () { _resource = default; }
-
     }
 
 }
