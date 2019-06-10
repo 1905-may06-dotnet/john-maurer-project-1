@@ -13,8 +13,6 @@ namespace PizzaBox.Domain.Models.IO {
 
         protected abstract HashSet < T > ReadAll ();
 
-        public IRead () : base () {}
-
     }
 
 }

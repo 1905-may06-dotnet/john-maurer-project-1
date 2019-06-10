@@ -9,8 +9,6 @@ namespace PizzaBox.Domain.Models {
         where T: new ()
         where Ty: EventArgs, new () {
 
-        public IModels () {}
-
         abstract public T Query ( ref Ty Index );
 
         public HashSet < T > Records { get { return ReadAll (); } }
