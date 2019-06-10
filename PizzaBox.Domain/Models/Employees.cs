@@ -16,6 +16,9 @@ namespace PizzaBox.Domain.Models {
                 else if ( entityArgs.Username != null && entityArgs.Username != string.Empty )
                     return new Elements.Employee 
                         ( ( from rec in context.Employees where rec.Username == entityArgs.Username select rec ).FirstOrDefault () );
+                else if ( entityArgs.Username != null && entityArgs.Username != string.Empty && entityArgs.Password != null && entityArgs.Password != string.Empty )
+                    return new Elements.Employee 
+                        ( ( from rec in context.Employees where rec.Username == entityArgs.Username && rec.Password == entityArgs.Password select rec ).FirstOrDefault () );
                 else return Elements.Employee.Empty;
 
             }

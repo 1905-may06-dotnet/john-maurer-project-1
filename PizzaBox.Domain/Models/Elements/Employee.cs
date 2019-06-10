@@ -8,12 +8,15 @@ namespace PizzaBox.Domain.Models.Elements {
 
         public static new readonly EmployeeQuery Empty = new EmployeeQuery ();
 
-        public Guid  Id        = Guid.Empty;
+        public Guid   Id       = Guid.Empty;
         public string Username = string.Empty;
+        public string Password = string.Empty;
 
         public EmployeeQuery () { }
 
         public EmployeeQuery ( Guid Id ) { if ( Id != Guid.Empty ) this.Id = Id; }
+
+        public EmployeeQuery ( string username, string password ) { Username = username; Password = password; }
 
         public EmployeeQuery ( string username ) { Username = username; }
 
