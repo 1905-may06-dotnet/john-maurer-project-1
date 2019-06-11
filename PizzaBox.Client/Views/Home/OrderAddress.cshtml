@@ -1,0 +1,16 @@
+﻿@model PizzaBox.Client.Models.OrderAddressModel
+
+<form asp-controller="HomeController" asp-action="PullLocation" method="post">
+
+
+    <div>
+
+        @{
+    
+            @Html.EditorForModel()
+
+        }
+
+    </div>
+
+</form>
