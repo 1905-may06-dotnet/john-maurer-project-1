@@ -1,0 +1,75 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  vmImage: 'windows-2019'
+
+variables:
+  projectPath: 'PizzaBox.Client'
+  buildConfiguration: 'Release'
+
+steps:
+#CONFIG
+- task: SonarCloudPrepare@1
+  inputs:
+    SonarCloud: 'PizzaBox'
+    organization: '1905-may06-dotnet'
+    scannerMode: 'MSBuild'
+    projectKey: 'PizzaBoxUta'
+    projectName: 'PizzaBoxUta'
+    extraProperties: 
+      sonar.cs.opencover.reportsPath=$'(Build.ArtifactStagingDirectory)/coverage/*'
+      sonar.cs.vstest.reportsPath=$'(Build.ArtifactStagingDirectory/test/*)'
+  displayName: 'Sonar Prepare Analysis'
+
+#BUILD
+- script: dotnet build --configuration $(buildConfiguration)
+  workingDirectory: $(projectPath)
+  displayName: 'dotnet build $(buildConfiguration)'
+
+#BASIC TEST
+- script: dotnet test
+    --configuration $(projectPath)
+    --logger trx
+    --no-build
+    --results-directory $(Build.ArtifactStagingDirectory/test/)
+    /p:CollectCoverage=true
+    /p:CoverletOutputFormat=opencover
+    /p:CoverletOutput='$(Build.ArtifactStagingDirectory/coverage/)'
+  workingDirectory: $(projectPath)
+  displayName: 'John-Maurer-1-1 Project Test'
+
+- task: SonarCloudAnalyze@1
+
+- task: SonarCloudPublish@1
+  inputs:
+    pollingTimeoutSec: '300'
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'VSTest'
+    testResultsFiles: '*.trx'
+    searchFolder: '$(Build.ArtifactStagingDirectory)/test'
+  displayName: 'John-Maurer-1-1 Publish Test-Results'
+
+#Publish Build Files
+- task: DotNetCoreCli@2
+  inputs:
+    command: publish
+    projects: $(projectPath)/*.csproj
+    arguments: '--configuration $(buildConfiguration) --output $(Build.ArtifactStagingDirectory)'
+    publishWebProjects: false
+  displayName: 'John-Maurer-1-1 DonNet Publish'
+
+  #Publish Build Artifacts
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'drop'
+    publishLocation: 'Container'
+  displayName: 'John-Maurer-1-1 Publish Build Artifacts'
