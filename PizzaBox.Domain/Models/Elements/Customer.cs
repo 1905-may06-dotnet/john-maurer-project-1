@@ -45,13 +45,28 @@ namespace PizzaBox.Domain.Models.Elements {
             lock ( _cust_writeLock ) {
 
                 using ( var context = new Data.PizzaBoxDbContext () ) {
+                    
+                    var local = context.People.Find ( _resource.Id );
 
-                    if ( context.People.Find ( _resource.Id ) == null ) {
+                    if ( local == null ) {
 
                         context.Attach < Data.Entities.Person > ( _resource );
                         context.Add < Data.Entities.Person > ( _resource );
 
-                    } else context.Update < Data.Entities.Person > ( _resource );
+                    } else {
+
+                        local.Addresses = _resource.Addresses;
+                        local.DoB       = _resource.DoB;
+                        local.Email     = _resource.Email;
+                        local.Fname     = _resource.Fname;
+                        local.Gender    = _resource.Gender;
+                        local.Lname     = _resource.Lname;
+                        local.Mname     = _resource.Mname;
+                        local.Phone     = _resource.Phone;
+
+                        context.Update < Data.Entities.Person > ( local );
+
+                    }
 
                     context.SaveChanges ();
 

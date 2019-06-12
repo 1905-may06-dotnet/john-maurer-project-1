@@ -67,12 +67,29 @@ namespace PizzaBox.Domain.Models.Elements {
 
                 using ( var context = new Data.PizzaBoxDbContext () ) {
 
-                    if ( context.Addresses.Find ( _resource.Id ) == null ) {
+                    var local = context.Addresses.Find ( _resource.Id );
+
+                    if ( local == null ) {
 
                         context.Attach ( _resource );
                         context.Add < Data.Entities.Address > ( _resource );
 
-                    } else context.Update < Data.Entities.Address > ( _resource );
+                    } else {
+
+                        local.Apt                 = _resource.Apt;
+                        local.City                = _resource.City;
+                        local.OrderId             = _resource.OrderId;
+                        local.OutletId            = _resource.OutletId;
+                        local.PersonId            = _resource.PersonId;
+                        local.PersonId1           = _resource.PersonId1;
+                        local.PersonId1Navigation = _resource.PersonId1Navigation;
+                        local.State               = _resource.State;
+                        local.Street              = _resource.Street;
+                        local.Zip                 = _resource.Zip;
+
+                        context.Update < Data.Entities.Address > ( local );
+
+                    }
                     
                     context.SaveChanges ();
 

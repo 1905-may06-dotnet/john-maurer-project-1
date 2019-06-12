@@ -43,12 +43,24 @@ namespace PizzaBox.Domain.Models.Elements {
 
                 using ( var context = new Data.PizzaBoxDbContext () ) {
 
+                    var local = context.Outlets.Find ( _resource.Id );
+
                     if ( context.Outlets.Find ( _resource.Id ) == null ) {
 
                         context.Attach ( _resource );
                         context.Add < Data.Entities.Outlet > ( _resource );
 
-                    } else context.Update < Data.Entities.Outlet > ( _resource );
+                    } else {
+
+                        local.Addresses = _resource.Addresses;
+                        local.Employees = _resource.Employees;
+                        local.Items     = _resource.Items;
+                        local.Orders    = _resource.Orders;
+                        local.Organization = _resource.Organization;
+
+                        context.Update < Data.Entities.Outlet > ( local );
+
+                    }
 
                     context.SaveChanges ();
 

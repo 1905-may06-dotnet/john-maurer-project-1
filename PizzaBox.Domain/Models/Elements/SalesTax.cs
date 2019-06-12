@@ -41,15 +41,24 @@ namespace PizzaBox.Domain.Models.Elements {
 
             lock ( _tax_writeLock ) {
 
-                using ( var context = new Data.PizzaBoxDbContext () ) {    
+                using ( var context = new Data.PizzaBoxDbContext () ) {
 
-                    if ( context.StateTaxes.Find ( _resource.Id ) == null ) {
+                    var local = context.StateTaxes.Find ( _resource.Id );
+
+                    if ( local == null ) {
 
                         context.Entry ( _resource );
                         context.Attach ( _resource );
                         context.Add < Data.Entities.StateTax > ( _resource );
 
-                    } else context.Update < Data.Entities.StateTax > ( _resource );
+                    } else {
+
+                        local.TaxRate   = _resource.TaxRate;
+                        local.Territory = _resource.Territory;
+
+                        context.Update < Data.Entities.StateTax > ( local );
+
+                    }
 
                     context.SaveChanges ();
 

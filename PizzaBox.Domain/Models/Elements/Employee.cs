@@ -48,12 +48,26 @@ namespace PizzaBox.Domain.Models.Elements {
 
                 using ( var context = new Data.PizzaBoxDbContext () ) {
 
-                    if ( context.Employees.Find ( _resource.Id ) == null ) {
+                    var local = context.Employees.Find ( _resource.Id );
+
+                    if ( local == null ) {
 
                         context.Attach < Data.Entities.Employee > ( _resource );
                         context.Add < Data.Entities.Employee > ( _resource );
 
-                    } else context.Update < Data.Entities.Employee > ( _resource );
+                    } else {
+
+                        local.Password = _resource.Password;
+                        local.Person   = _resource.Person;
+                        local.Position = _resource.Position;
+                        local.Status   = _resource.Status;
+                        local.Username = _resource.Username;
+                        local.Wage     = _resource.Wage;
+                        local.WageType = _resource.WageType;
+
+                        context.Update < Data.Entities.Employee > ( local );
+
+                    }
 
                     context.SaveChanges ();
 
